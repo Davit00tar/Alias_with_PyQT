@@ -1,9 +1,28 @@
+from random import randint
+
+
 def word_adder(word, lst):
-    if word in lst:
-        print('Already have that word!')
-    elif word == ('' or ' '):
-        print('That is not a Word')
+    if not word:
+        message = "Can't add that word because it's empty!"
+    elif (a := word.capitalize()) in lst:
+        message = 'Already have that word!'
     else:
-        lst.append(word.capitalize())
+        message = ''
+        lst.append(a)
+        w = open('base.txt', 'a')
+        w.write("\n" + a)
+    return message
+
+
+def word_generator(data):
+    return data[randint(0, len(data) - 1)]
+
+
+def is_odd(num):
+    return True if num % 2 == 1 else False
+
+
+
+
 
 
