@@ -5,12 +5,14 @@ from mechanics import *
 from word_class import WordPage
 words = base_lst
 
+########
+
 
 class MainWindow(QMainWindow):
     """
     The main window class for Alias, All the UI elements are here.
     And overall the main code is in this class. The MainWindow Object
-    is only called once in the pogramme, ano only uses its atribute
+    is only called once in the programme, ano only uses its atribute
     inherited from Parent Class: QMainWindow, which is .show()
     """
     def __init__(self, *args, **kwargs):
@@ -98,7 +100,7 @@ class MainWindow(QMainWindow):
         page4layout.addWidget(QLabel('SELECT TEAM NUMBER'))
         self.team_select = QComboBox()
 
-        self.team_select.addItems(['One', 'Two', 'Three'])
+        self.team_select.addItems(['Two', 'Three'])
         page4layout.addWidget(self.team_select)
         self.team_select.setCurrentIndex(0)
 
@@ -435,9 +437,9 @@ class MainWindow(QMainWindow):
     def clicked_next_4(self):
         """Connected to a QPushButton object
             changes the main layout Index"""
-        if self.team_select.currentIndex() == 1:
+        if self.team_select.currentIndex() == 0:
             self.playing_team = [1, 2]
-        elif self.team_select.currentIndex() == 2:
+        elif self.team_select.currentIndex() == 1:
             self.playing_team = [1, 2, 3]
 
         self.layout.setCurrentIndex(4)
@@ -456,10 +458,8 @@ class MainWindow(QMainWindow):
         """Connected to a QPushButton object
         changes the main layout Index
         considering the number of teams selected"""
-        if self.team_select.currentIndex() == 1 or self.team_select.currentIndex() == 2:
-            self.layout.setCurrentIndex(5)
-        else:
-            self.layout.setCurrentIndex(7)
+        self.layout.setCurrentIndex(5)
+
 
     def clicked_back_6(self):
         """Connected to a QPushButton object
@@ -467,7 +467,7 @@ class MainWindow(QMainWindow):
         self.layout.setCurrentIndex(4)
 
     def clicked_next_6(self):
-       if self.team_select.currentIndex() == 2:
+       if self.team_select.currentIndex() == 1:
            self.layout.setCurrentIndex(6)
        else:
            self.layout.setCurrentIndex(7)
@@ -512,13 +512,12 @@ class MainWindow(QMainWindow):
         self.label3_11.setText(self.team2name.text())
         self.label5_11.setText(self.team3name.text())
         self.turn += 1
-        print(self.turn)
         if self.team_select.currentIndex() == 0:
-            self.label_score_9.setText(f" ITS {self.turn +1}'s TURN")
-            self.layout.setCurrentIndex(8)
-        elif self.team_select.currentIndex() == 1:
-            self.label_score_10.setText(f" ITS {self.turn + 1}'s TURN")
+            self.label_score_10.setText(f" ITS {self.turn +1}'s TURN")
             self.layout.setCurrentIndex(9)
+        elif self.team_select.currentIndex() == 1:
+            self.label_score_11.setText(f" ITS {self.turn + 1}'s TURN")
+            self.layout.setCurrentIndex(10)
         else:
             self.label_score_11.setText(f" ITS {self.turn + 1}'s TURN")
             self.layout.setCurrentIndex(10)
@@ -532,6 +531,8 @@ class MainWindow(QMainWindow):
         self.team1score = 0
         self.team2score = 0
         self.team3score = 0
+        self.time_select.setText('30')
+        self.score_select.setText('50')
         self.label2_9.setText(str(self.team1score))
         self.label2_10.setText(str(self.team1score))
         self.label2_11.setText(str(self.team1score))
@@ -677,23 +678,23 @@ class MainWindow(QMainWindow):
         if self.turn >= len(self.playing_team):
             self.turn = 0
         if self.team_select.currentIndex() == 0:
-            self.label_score_9.setText(f" ITS {self.turn +1}'s TURN")
-            self.layout.setCurrentIndex(8)
-        elif self.team_select.currentIndex() == 1:
-            self.label_score_10.setText(f" ITS {self.turn + 1}'s TURN")
+            self.label_score_10.setText(f" ITS {self.turn +1}'s TURN")
             self.layout.setCurrentIndex(9)
+        elif self.team_select.currentIndex() == 1:
+            self.label_score_11.setText(f" ITS {self.turn + 1}'s TURN")
+            self.layout.setCurrentIndex(10)
         else:
             self.label_score_11.setText(f" ITS {self.turn + 1}'s TURN")
 
         if self.team_select.currentIndex() == 0:
-            self.layout.setCurrentIndex(8)
-        elif self.team_select.currentIndex() == 1:
             self.layout.setCurrentIndex(9)
+        elif self.team_select.currentIndex() == 1:
+            self.layout.setCurrentIndex(10)
         else:
             self.layout.setCurrentIndex(10)
 
     def game_over(self, score, name):
-        """When ihis function is called it means the game is over and
+        """When this function is called it means the game is over and
         there is a winner. It gives tee winner name and teh score
         they won the game, changes the layout index"""
         self.label3_15.setText(f" {name} WON THE GAME!")
