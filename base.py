@@ -1,5 +1,5 @@
 
-base = open('Mechanics/base.txt', 'r')
+base = open('List/base.txt', 'r')
 base_lst = base.read().splitlines()
 base.close()
 
